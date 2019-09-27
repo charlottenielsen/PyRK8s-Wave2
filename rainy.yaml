@@ -1,0 +1,39 @@
+--- #
+--- # Course :: Problem Diagnosis and Troubleshooting Lab 
+--- # Pod
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: <team>-rainy
+spec:
+  containers:
+    - name: <team>-rainy
+      image: ibmicpcoc/rainy:latest
+      imagePullPolicy: Always
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "125m"
+        limits:
+          memory: "64Mi"
+          cpu: "250m"
+      volumeMounts:
+        - name: podinfo
+          mountPath: /etc/podinfo
+          readOnly: false
+  volumes:
+    - name: podinfo
+      downwardAPI:
+        items:
+          - path: "mem_limit"
+            resourceFieldRef:
+              containerName: <team>-rainy
+              resource: limits.memory
+              divisor: 1Mi
+          - path: "mem_request"
+            resourceFieldRef:
+              containerName: <team>-rainy
+              resource: requests.memory
+              divisor: 1Mi
+---
