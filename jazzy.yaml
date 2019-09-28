@@ -1,23 +1,12 @@
 --- #
 --- # Course :: Problem Diagnosis and Troubleshooting Lab 
 --- #
---- # Network Policy
----
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: jazzy-network-policy
-  namespace: <team>
-spec:
-  podSelector: {}
-  ingress: []
----
 --- # Service 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: <team>-jazzy-podb
+  name: <team>-jazzy
   namespace: <team>
   labels:
     app: <team>-jazzy
@@ -25,36 +14,33 @@ spec:
   type: NodePort
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 9000
       protocol: TCP
-      name: <team>-jazzy-podb
+      name: <team>-jazzy
   selector:
-    app: <team>-jazzy-podb
-
+    app: <team>-jazzy
 --- #
 --- # Deployment
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: <team>-jazzy-poda
+  name: <team>-jazzy
   namespace: <team>
   labels:
     app: <team>-jazzy
-    role: ask
 spec:
   selector:
     matchLabels:
-      app: <team>-jazzy-poda
+      app: <team>-jazzy
   replicas: 1
   template:
     metadata:
       labels:
-        app: <team>-jazzy-poda
-        role: ask
+        app: <team>-jazzy
     spec:
       containers:
-      - name: <team>-jazzy-poda
+      - name: <team>-jazzy
         image: docker.io/ibmicpcoc/jazzy:latest
         imagePullPolicy: Always
         env:
@@ -76,42 +62,8 @@ spec:
               configMapKeyRef:
                 name: <team>-collector-config
                 key: INSTRUCTOR_CONFIG
-          - name: POD_ROLE
-            value: "a" 
-          - name: DATA_URL
-            value: "http://<team>-jazzy-podb" 
-        resources:
-          requests:
-            cpu: 50m
-            memory: 50Mi
---- #
---- # Deployment
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: <team>-jazzy-podb
-  namespace: <team>
-  labels:
-    app: <team>-jazzy
-    role: ask
-spec:
-  selector:
-    matchLabels:
-      app: <team>-jazzy-podb
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: <team>-jazzy-podb
-    spec:
-      containers:
-      - name: <team>-jazzy-podb
-        image: docker.io/ibmicpcoc/jazzy:latest
-        imagePullPolicy: Always
-        env:
-          - name: POD_ROLE
-            value: "b" 
+          - name: YARNS_URL
+            value: "http://yarns" 
         resources:
           requests:
             cpu: 50m

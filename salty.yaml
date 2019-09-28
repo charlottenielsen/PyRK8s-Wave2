@@ -4,25 +4,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: <team>-karma
+  name: <team>-salty
   namespace: <team>
   labels:
-    app: <team>-karma
+    app: <team>-salty
 spec:
   selector:
     matchLabels:
-      app: <team>-karma
+      app: <team>-salty
   replicas: 1
   template:
     metadata:
       labels:
-        app: <team>-karma
+        app: <team>-salty
     spec:
       containers:
-      - name: <team>-karma
-        image: docker.io/ibmicpcoc/karma:latest
+      - name: <team>-salty
+        image: docker.io/ibmicpcoc/salty:latest
         imagePullPolicy: Always
-        command: ["node", "app.js"]
+        ports:
+        - containerPort: 4500
         env:
           - name: APP_NAMESPACE
             valueFrom:
@@ -46,4 +47,23 @@ spec:
           requests:
             cpu: 50m
             memory: 50Mi
+---
+--- # Service defs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: <team>-salty
+  namespace: <team>
+  labels:
+    app: <team>-salty
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 4500
+      protocol: TCP
+      name: <team>-salty
+  selector:
+    app: <team>-salty
 ---

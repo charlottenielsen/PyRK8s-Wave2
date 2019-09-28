@@ -6,6 +6,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: <team>-rainy
+  namespace: <team>
 spec:
   containers:
     - name: <team>-rainy
