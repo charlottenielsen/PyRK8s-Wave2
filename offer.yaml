@@ -14,7 +14,7 @@ spec:
   accessModes:
   - ReadWriteOnce 
   nfs: 
-    path: /storage/<team>/pvc001
+    path: /var/nfsshare/<team>/pvc001
     server: 159.23.66.102
   persistentVolumeReclaimPolicy: Recycle    
 --- #
