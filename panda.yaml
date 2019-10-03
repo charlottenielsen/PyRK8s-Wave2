@@ -26,7 +26,7 @@ spec:
         imagePullPolicy: Always
         command: ["node", "app.js"]
         volumeMounts:
-        - name: panda-d
+        - name: <team>-panda-d
           mountPath: /data
         env:
           - name: APP_NAMESPACE
@@ -54,7 +54,8 @@ spec:
       restartPolicy: Always            
   volumeClaimTemplates:
   - metadata:
-      name: panda-data
+      name: <team>-panda-data
+      namespace: <team>
     spec:
       accessModes:
         - ReadWriteOnce

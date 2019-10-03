@@ -1,12 +1,11 @@
 FROM alpine
-MAINTAINER IBM ICP CoC Team
+LABEL maintainer="IBM Hybrid Cloud CoC Team"
 
 CMD mkdir /app
 WORKDIR /app
-COPY carbs.sh .
+COPY app.sh .
 
-RUN apk add curl bash \
-&& chmod +x carbs.sh 
+RUN apk add --no-cache curl bash nano \
+&& chmod +x /app/app.sh 
 
-CMD ["/bin/bash", "-c", "./carbs.sh"]
-
+CMD ["/bin/bash", "-c", "./app.sh carbs"]

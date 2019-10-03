@@ -1,5 +1,4 @@
 FROM nginxinc/nginx-unprivileged
-MAINTAINER IBM Hybrid Cloud CoC Team
+LABEL maintainer="IBM Hybrid Cloud CoC Team"
 
-
-
+# Expect YAML to provide entrypoint

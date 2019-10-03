@@ -64,7 +64,7 @@ spec:
                 name: <team>-collector-config
                 key: INSTRUCTOR_CONFIG
           - name: ROUTE
-            value: "hotdog-<team>.pysyd.159.23.66.107.nip.io.nip.io"
+            value: "hotdog-<team>.pybzl.169.57.135.146.nip.io.nip.io"
         resources:
           requests:
             cpu: 50m

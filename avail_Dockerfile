@@ -1,9 +1,11 @@
 FROM alpine
-MAINTAINER IBM ICP CoC Team
+LABEL maintainer="IBM Hybrid Cloud CoC Team"
 
 CMD mkdir /app
 WORKDIR /app
-COPY avail.sh .
+COPY app.sh .
 
-RUN apk add curl bash nano \
-&& chmod +x avail.sh 
+RUN apk add --no-cache curl bash nano \
+&& chmod +x /app/app.sh 
+
+# Expect YAML to provide entrypoint

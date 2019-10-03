@@ -4,23 +4,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: <team>-carbon
+  name: <team>-carbs
   namespace: <team>
   labels:
-    app: <team>-carbon
+    app: <team>-carbs
 spec:
   selector:
     matchLabels:
-      app: <team>-carbon
+      app: <team>-carbs
   replicas: 1
   template:
     metadata:
       labels:
-        app: <team>-carbon
+        app: <team>-carbs
     spec:
       containers:
-      - name: <team>-carbon
-        image: docker.io/ibmicpcoc/carbon:latest
+      - name: <team>-carbs
+        image: docker.io/ibmicpcoc/carbs:latest
         imagePullPolicy: Always
         env:
           - name: APP_NAMESPACE
